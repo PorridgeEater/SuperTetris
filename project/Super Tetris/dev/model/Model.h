@@ -107,12 +107,17 @@ public:
 	{
 		return m_color;
 	}
+	int get_dir() const throw()
+	{
+		return m_dir;
+	}
 	bool get_matrix(int x, int y)
 	{
 		if((x>=0)&&(x<4)&&(y>=0)&&(y<4))
 			return m_matrix[x][y];
 		throw();
 	}
+
 	void Rotate()
 	{
 		m_dir = (++m_dir) % 4;
