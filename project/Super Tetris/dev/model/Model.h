@@ -70,7 +70,10 @@ public:
 		}
 		return *this;
 	}
-
+	void set_x(int x) throw()
+	{
+		this->m_x = x;
+	}
 	void set_y(int y) throw()
 	{
 		this->m_y = y;
