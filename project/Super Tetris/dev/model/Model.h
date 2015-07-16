@@ -139,8 +139,14 @@ private:
 class Map
 {
 public:
-	Map() throw()
+	Map()
 	{
+		for(int i=0 ;i<LENGTH ;i++)
+			for(int j=0 ;j<WIDTH ;j++)
+			{
+				m_color[i][j] = 0;
+				m_exist[i][j] = false;
+			}
 	}
 	Map(const Map& p)
 	{
@@ -161,47 +167,6 @@ public:
 			}
 	}
 
-	bool get_color(int x, int y)
-	{
-		if((x>=0)&&(x<LENGTH)&&(y>=0)&&(y<WIDTH))
-			return m_color[x][y];
-		throw();
-	}
-	int get_exist(int x, int y)
-	{
-		if((x>=0)&&(x<LENGTH)&&(y>=0)&&(y<WIDTH))
-			return m_exist[x][y];
-		throw();
-	}
-	void Merge(BaseShape& shape)		//shape触底后合并
-	{
-		int x = shape.get_x();
-		int y = shape.get_y();
-		int color = shape.get_color();
-		
-		for(int i=0 ;i<4 ;i++)
-			for(int j=0 ;j<4 ;j++)
-			if (shape.get_matrix(i,j))
-			{
-				m_color[x+i][y+j] = color;
-				m_exist[x+i][y+j] = 1;
-			}
-
-	}
-	void Eliminate(int y){			//消除单行y
-		int i, j;
-		for (j=y;j>0;j++)
-			for (i=0;i<LENGTH;i++)
-			{
-				m_color[i][j] = m_color[i][j-1];
-				m_exist[i][j] = m_exist[i][j-1];		
-			}
-		for (i=0;i<LENGTH;i++)
-		{
-			m_color[i][0] = 0;
-			m_exist[i][0] = 0;		
-		}	
-	}
 	Map& operator= (const Map& m)
 	{
 		if(this != &m){
@@ -228,6 +193,49 @@ public:
 		
 		return *this;
 	} 
+
+	int get_color(int x, int y)
+	{
+		if((x>=0)&&(x<LENGTH)&&(y>=0)&&(y<WIDTH))
+			return m_color[x][y];
+		throw();
+	}
+	bool get_exist(int x, int y)
+	{
+		if((x>=0)&&(x<LENGTH)&&(y>=0)&&(y<WIDTH))
+			return m_exist[x][y];
+		throw();
+	}
+
+	void Merge(BaseShape& shape)		//shape触底后合并
+	{
+		int x = shape.get_x();
+		int y = shape.get_y();
+		int color = shape.get_color();
+		
+		for(int i=0 ;i<4 ;i++)
+			for(int j=0 ;j<4 ;j++)
+			if (shape.get_matrix(i,j))
+			{
+				m_color[x+i][y+j] = color;
+				m_exist[x+i][y+j] = 1;
+			}
+
+	}
+	void Eliminate(int y){			//消除单行y
+		int i, j;
+		for (j=y;j>0;j++)
+			for (i=0;i<LENGTH;i++)
+			{
+				m_color[i][j] = m_color[i][j-1];
+				m_exist[i][j] = m_exist[i][j-1];		
+			}
+		for (i=0;i<LENGTH;i++)
+		{
+			m_color[i][0] = 0;
+			m_exist[i][0] = false;		
+		}	
+	}
 	
 
 private:
