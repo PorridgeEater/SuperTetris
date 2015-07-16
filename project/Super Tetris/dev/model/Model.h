@@ -176,6 +176,7 @@ public:
 		
 		for(int i=0 ;i<4 ;i++)
 			for(int j=0 ;j<4 ;j++)
+			if (shape.get_matrix(i,j))
 			{
 				m_color[x+i][y+j] = color;
 				m_exist[x+i][y+j] = 1;
