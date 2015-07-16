@@ -10,7 +10,7 @@ class BaseShape
 {
 public:
 
-	BaseShape(bool matrix[4][4]={false},int color=0) 
+	BaseShape(int color=0) 
 	{	
 		m_x = 4;
 		m_y = 0;
@@ -18,7 +18,7 @@ public:
 		m_color = color;
 		for(int i=0 ;i<4 ;i++)
 			for(int j=0 ;j<4 ;j++)
-				m_matrix[i][j] = matrix[i][j];
+				m_matrix[i][j] = false;
 	}
 	BaseShape(const BaseShape& b)
 	{
@@ -91,6 +91,12 @@ public:
 	{
 		return m_color;
 	}
+	bool get_matrix(int x, int y)
+	{
+		if((x>=0)&&(x<4)&&(y>=0)&&(y<4))
+			return m_matrix[x][y];
+		throw();
+	}
 	void Rotate()
 	{
 		m_dir = (++m_dir) % 4;
@@ -134,6 +140,18 @@ public:
 			}
 	}
 
+	bool get_color(int x, int y)
+	{
+		if((x>=0)&&(x<LENGTH)&&(y>=0)&&(y<WIDTH))
+			return m_color[x][y];
+		throw();
+	}
+	int get_exist(int x, int y)
+	{
+		if((x>=0)&&(x<LENGTH)&&(y>=0)&&(y<WIDTH))
+			return m_exist[x][y];
+		throw();
+	}
 	void Merge(BaseShape& shape)		//shape触底后合并
 	{
 		int x = shape.get_x();
@@ -216,7 +234,7 @@ public:
 	{
 		return m_points;
 	}
-	BaseShape& get_next() const throw()
+	BaseShape& get_next() throw()
 	{
 		return m_next;
 	}
