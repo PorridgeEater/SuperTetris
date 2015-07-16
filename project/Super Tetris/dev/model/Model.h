@@ -71,6 +71,10 @@ public:
 		return *this;
 	}
 
+	void set_x(int x) throw()
+	{
+		this->m_x = x;
+	}
 	void set_y(int y) throw()
 	{
 		this->m_y = y;
@@ -78,6 +82,18 @@ public:
 	void set_color(int color) throw()
 	{
 		this->m_color = color;
+	}
+	void move_left()
+	{
+		m_x--;
+	}
+	void move_right()
+	{
+		m_x++;
+	}
+	void move_down()
+	{
+		m_y++;
 	}
 	int get_x() const throw()
 	{
