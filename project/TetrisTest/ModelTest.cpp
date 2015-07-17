@@ -132,6 +132,31 @@ void ModelTest()
 	{
 		printf("map exception!");
 	}
+
+	try
+	{
+		Board b1;
+		if (b1.get_points()!=0)
+			throw int(4);
+		if (b1.add_points(10) != 10)
+			throw int(4)
+		Board b2(b1);
+		if (b2.get_points()==0)
+			throw int(4);
+		Board b3(Board(0));
+		if (b3.get_points()!=0)
+			throw int(4);	
+		Board b4=b3;
+		if (b4.get_points()!=0)
+			throw int(4);
+		Board b5=Board(b3);
+		if (b5.get_points()!=0)
+			throw int(4);
+	}
+	catch(...)
+	{
+		printf("board exception!");
+	}
 }
 
 void main()
