@@ -260,14 +260,6 @@ public:
 		m_next = static_cast<BaseShape&&>(b.m_next);
 	}
 
-	int get_points() const throw()
-	{
-		return m_points;
-	}
-	BaseShape& get_next() throw()
-	{
-		return m_next;
-	}
 	Board& operator= (const Board& b)
 	{
 		if(this != &b){
@@ -285,6 +277,21 @@ public:
 		}
 		
 		return *this;
+	}
+
+	int get_points() const throw()
+	{
+		return m_points;
+	}
+	BaseShape& get_next() throw()
+	{
+		return m_next;
+	}
+
+	int add_points(int points) const throw()
+	{
+		m_points += points;
+		return m_points;
 	} 
 
 private:
