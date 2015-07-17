@@ -1,8 +1,8 @@
 //uncompled and not tested yet
 
-#include "Model.h"
+#include "src/Model.h"
 
-#include "stdio.h"
+#include <stdio.h>
 
 
 bool ShapeEqual(const BaseShape& a,const BaseShape& b)
@@ -11,7 +11,7 @@ bool ShapeEqual(const BaseShape& a,const BaseShape& b)
 	if (a.get_y()!=b.get_y())	return false;
 	if (a.get_color()!=b.get_color())	return false;
 	if (a.get_dir()!=b.get_dir())	return false;
-
+	return true;
 }
 
 void ModelTest()
@@ -53,7 +53,7 @@ void ModelTest()
 		s.set_x(1);
 		if (s.get_x()!=1)
 			throw int(2);
-		s.set_X(2);
+		s.set_x(2);
 		if (s.get_x()==1)
 			throw int(2);
 		
@@ -104,12 +104,12 @@ void ModelTest()
 		Map m1;
 		for(i=0 ;i<4 ;i++)
 		for(j=0 ;j<4 ;j++)
-			if(m1.get_exist(i,j)||m1.get_color())
+			if(m1.get_exist(i,j)||m1.get_color(i,j))
 				throw int(3);
 		Map m2(m1);
 		for(i=0 ;i<4 ;i++)
 		for(j=0 ;j<4 ;j++)
-			if(m2.get_exist(i,j)||m2.get_color())
+			if(m2.get_exist(i,j)||m2.get_color(i,j))
 				throw int(3);
 
 		if(Map(m1).get_exist(0,0))
@@ -118,12 +118,12 @@ void ModelTest()
 		Map m3=m1;
 		for(i=0 ;i<4 ;i++)
 		for(j=0 ;j<4 ;j++)
-			if(m3.get_exist(i,j)||m3.get_color())
+			if(m3.get_exist(i,j)||m3.get_color(i,j))
 				throw int(3);
 		Map m4=Map(m1);
 		for(i=0 ;i<4 ;i++)
 		for(j=0 ;j<4 ;j++)
-			if(m4.get_exist(i,j)||m4.get_color())
+			if(m4.get_exist(i,j)||m4.get_color(i,j))
 				throw int(3);
 
 
@@ -138,18 +138,18 @@ void ModelTest()
 		Board b1;
 		if (b1.get_points()!=0)
 			throw int(4);
-		if (b1.add_points(10) != 10)
-			throw int(4)
 		Board b2(b1);
-		if (b2.get_points()==0)
+		if (b2.get_points()!=0)
 			throw int(4);
-		Board b3(Board(0));
-		if (b3.get_points()!=0)
+		if (b1.add_points(10) != 10)
+			throw int(4);
+
+		if (Board(b2).get_points()!=0)
 			throw int(4);	
-		Board b4=b3;
+		Board b4=b2;
 		if (b4.get_points()!=0)
 			throw int(4);
-		Board b5=Board(b3);
+		Board b5=Board(b2);
 		if (b5.get_points()!=0)
 			throw int(4);
 	}

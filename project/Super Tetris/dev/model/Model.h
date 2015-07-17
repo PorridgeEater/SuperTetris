@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <vector>
 
 #define LENGTH	10
 #define WIDTH	20
@@ -115,7 +114,7 @@ public:
 	{
 		if((x>=0)&&(x<4)&&(y>=0)&&(y<4))
 			return m_matrix[x][y];
-		throw();
+		//throw();
 	}
 
 	void Rotate()
@@ -198,13 +197,13 @@ public:
 	{
 		if((x>=0)&&(x<LENGTH)&&(y>=0)&&(y<WIDTH))
 			return m_color[x][y];
-		throw();
+		//throw ();
 	}
 	bool get_exist(int x, int y)
 	{
 		if((x>=0)&&(x<LENGTH)&&(y>=0)&&(y<WIDTH))
 			return m_exist[x][y];
-		throw();
+		//throw();
 	}
 
 	void Merge(BaseShape& shape)		//shape触底后合并
@@ -288,7 +287,7 @@ public:
 		return m_next;
 	}
 
-	int add_points(int points) const throw()
+	int add_points(int points)
 	{
 		m_points += points;
 		return m_points;
